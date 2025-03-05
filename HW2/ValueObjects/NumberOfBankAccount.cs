@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace SystemOfBankAccount.ValueObjects
 {
-    // Класс, представляющий номер банковского счета
-    class NumberOfBankAccount
+    // Структура, представляющая номер банковского счета
+    struct NumberOfBankAccount
     {
-        public int Value { get; } // Сделано без set, чтобы номер нельзя было менять после создания
+        private int value; 
+        public int Value { get; set; } // Публичное свойство для доступа к номеру счета
 
+        // Конструктор, принимающий номер счета в качестве аргумента
         public NumberOfBankAccount(int value)
         {
-            // Проверяем, что номер состоит из 10 цифр
+            // Проверяем, что номер состоит ровно из 10 цифр
             if (value < 1000000000 || value >= 10000000000)
                 throw new ArgumentOutOfRangeException(nameof(value), "Bank account number must be exactly 10 digits.");
-            
-            Value = value;
+
+            Value = value; // Присваиваем значение, если оно прошло проверку
         }
     }
 }
